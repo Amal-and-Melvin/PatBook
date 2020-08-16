@@ -1,0 +1,19 @@
+{
+    "forename": "fasd",
+    "surname": "Thomas",
+    "email": "amalthomas587@gmail.com",
+    "type": "patient",
+    "password": "er",
+    "passwordCheck": "er",
+    "dob": "2020-08-06T00:00:00.000Z",
+    "street": "81 Cardiff Road",
+    "postcode": "PO2 8BJ",
+    "city": "Portsmouth",
+    "phone": "07496462258"
+}
+
+
+{
+    "email": "amalthomas587@gmail.com",
+    "password": "er"
+}
