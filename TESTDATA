@@ -14,6 +14,15 @@
 
 
 {
-    "email": "amalthomas587@gmail.com",
-    "password": "er"
+    "email": "admin@gmail.com",
+    "password": "tre"
+}
+
+
+{
+    "date": "1597625303394",
+    "patient": "dfsds",
+    "slot": "assss",
+    "doctor": "daagg",
+    "time": "9am"
 }

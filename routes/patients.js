@@ -1,14 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const {getUsers, loginUser, addUser} = require('../controllers/users');
+const {createAppointment, getAppointments} = require('../controllers/appointments');
 
 router
-    .route('/register')
-    .post(addUser);
-
-router
-    .route('/login')
-    .post(loginUser);
-
-
+    .route('/appointment')
+    .post(createAppointment)
+    .get(getAppointments);
 module.exports = router;
