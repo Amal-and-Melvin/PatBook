@@ -23,8 +23,8 @@ if(process.env.NODE_ENV === 'development'){
 }
 
 app.use('/', users);
-app.use('/patient', auth, patients);
-app.use('/admin',auth, admins);
+app.use('/patients', auth, patients);
+app.use('/admins',auth, admins);
 
 
 const PORT = process.env.PORT;
