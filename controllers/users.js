@@ -62,7 +62,6 @@ exports.loginUser = async(req, res, next) =>{
     try {
         const user = req.body;
         //validate
-        console.log(user.email);
         if (!user.email || !user.password)
             return res.status(404).json({success:false, error: 'Not all fields have been entered.'});
         
@@ -112,15 +111,12 @@ exports.getUser = async (req, res, next) =>{
     try {
         const user = await User.findById(req.user);
         
-        return res.status(200).json({
-            success:true,
-            data: {
-                id: user._id,
-                type: user.type,
-                forename: user.forename,
-                surname:user.surname,
-                email: user.email
-            }
+        return res.status(200).json({  
+            id: user._id,
+            type: user.type,
+            forename: user.forename,
+            surname:user.surname,
+            email: user.email  
         })
     } catch (err) {
         return res.status(500).json({

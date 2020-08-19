@@ -48,6 +48,9 @@ exports.createAppointment = async(req, res, next) =>{
 
     try{
         const appointment = req.body;
+
+        if (!appointment.date || !appointment.time)
+            return res.status(404).json({success:false, error: 'Not all fields have been entered.'});
         //patients can only make appointments for themselves
         if(req.user){
             const currentUser = await User.findOne({_id: req.user});

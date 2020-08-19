@@ -21,7 +21,8 @@ nav a {
 input{
     background:#e8edee;
     border: #e8edee 2px solid;
-    padding:0.5rem;
+    padding:1rem;
+    border-radius: 5px;
     margin:1% 1% 0.1% 0%;
     font-size:1rem;
 }
@@ -32,6 +33,7 @@ input:focus {
 
 input[type="submit"] {
     border:none;
+    border-radius: 5px;
     background:#009879;
     color:white;
 }

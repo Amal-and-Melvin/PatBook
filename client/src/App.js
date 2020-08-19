@@ -7,7 +7,9 @@ import { Nav } from './components/Nav';
 import { Home } from './components/Home';
 import { Login } from './components/auth/Login';
 import { Register } from './components/auth/Register';
+import {CreateAppointment} from './components/appointment/CreateAppointment'
 import GlobalProvider from './context/GlobalState';
+
 
 export default function App() {
   const [userData, setUserData] = useState({
@@ -50,6 +52,7 @@ export default function App() {
           <Route exact path="/" component={Home}/>
           <Route path="/login" component={Login}/>
           <Route path="/register" component={Register}/>
+          <Route path="/appointments" component={CreateAppointment}/>
         </Switch>
         </div>
       </BrowserRouter>
