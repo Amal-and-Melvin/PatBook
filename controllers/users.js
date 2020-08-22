@@ -31,16 +31,7 @@ exports.addUser = async(req, res, next) =>{
 
         //hash password
         const salt = await bcrypt.genSalt();
-        user.password = await bcrypt.hash(user.password, salt);
-
-        //prevent anyone whos not an admin from making any type of user
-        if(req.user){
-            const currentUser = await User.findOne({_id: req.user});
-            if (currentUser.type !== 'admin')
-                user.type = 'patient'
-        }else{
-            user.type = 'patient'
-        } 
+        user.password = await bcrypt.hash(user.password, salt); 
 
         //create user
         await User.create(req.body);
@@ -49,10 +40,7 @@ exports.addUser = async(req, res, next) =>{
             data: user
         })    
     } catch (err) {
-        return res.status(400).json({
-            success:false,
-            error: err
-        })     
+        return res.status(400).json({success:false, error: err})    
     }
 }
 

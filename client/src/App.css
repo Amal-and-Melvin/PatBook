@@ -1,21 +1,27 @@
 *{
     margin: 0;
     padding:0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+h1 {
+    text-transform: capitalize;
+    font-family: sans-serif;
 }
 
 .container {
-    padding: 10% 10%;
+    padding: 5% 10%;
 }
 
 /*NAV BAR */
 nav {
     background:#005eb8;
-    padding:10px;
+    padding:15px;
 }
 
 nav a {
     color:white;
     text-decoration:none;
+    padding-right: 10px;
 }
 /*FORM */
 input{
@@ -50,6 +56,40 @@ input[type="submit"] {
     float:right;
     cursor: pointer;
 }
+
+/*TABLE */
+table{
+    margin-top:5%;
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9em;
+    min-width: 400px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  th {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+  }
+  
+  th, td {
+    padding: 12px 15px;
+  }
+  
+  tbody tr {
+    border-bottom: 1px solid #dddddd;
+  }
+  
+  tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+  }
+  
+  
+
+
 @media only screen and (max-width: 600px) {
     input[type='text'],
     input[type='password'] {

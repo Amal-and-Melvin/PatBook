@@ -15,10 +15,7 @@ exports.getAppointments = async(req, res, next) =>{
                 appointments = await Appointment.find({doctor: req.user});
             }
             console.log(appointments) 
-            return res.status(200).json({
-                success: true,
-                data: appointments
-            })    
+            return res.status(200).json({appointments})    
         }
     }catch(err) {
         return res.status(500).json({

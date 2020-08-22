@@ -1,7 +1,10 @@
 import React, { useContext } from "react";
 import { NavLink } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 import GlobalProvider from '../../context/GlobalState';
+
 export const AuthOptions = () => {
+    const history = useHistory();
     const { userData, setUserData } = useContext(GlobalProvider);
     
     const logout = () => {
@@ -10,7 +13,8 @@ export const AuthOptions = () => {
           user: undefined,
         });
         localStorage.setItem("auth-token", "");
-      };
+        history.push(`/`);
+    };
 
     return (
         <>

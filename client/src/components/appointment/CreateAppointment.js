@@ -3,9 +3,11 @@ import ErrorNotice from "../ErrorNotice";
 import GlobalProvider from '../../context/GlobalState';
 import Axios from "axios";
 
+import { Appointments } from './Appointments';
+
 export const CreateAppointment = () => {
     const [error, setError] = useState();
-    const { userData, setUserData } = useContext(GlobalProvider);
+    const { userData } = useContext(GlobalProvider);
     const [appointment, setAppointment] = useState({
         date: '',
         patient: '',
@@ -19,13 +21,13 @@ export const CreateAppointment = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
         try {
-            const tokenRes = await Axios.post(
+            await Axios.post(
                 "/patients/appointment",
                 appointment,
                 { headers: { "x-auth-token": userData.token } }
               );
         } catch (err) {
-            err.response.data.error && setError(err.response.data.error);
+            console.log(err.response.data.error);
         }
     }
 
@@ -68,6 +70,7 @@ export const CreateAppointment = () => {
                 </select><br />
                 <input type="submit" value="Request Appointment" />
             </form>
+            <Appointments user={userData.user} />
         </div>
     )
 }

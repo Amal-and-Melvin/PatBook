@@ -6,8 +6,13 @@ import './App.css';
 import { Nav } from './components/Nav';
 import { Home } from './components/Home';
 import { Login } from './components/auth/Login';
-import { Register } from './components/auth/Register';
+import { CreateUser } from './components/auth/CreateUser';
+
 import {CreateAppointment} from './components/appointment/CreateAppointment'
+
+import { UserList } from './components/admin/UserList';
+import { EditUser } from './components/admin/EditUser';
+
 import GlobalProvider from './context/GlobalState';
 
 
@@ -37,11 +42,12 @@ export default function App() {
           token,
           user: userRes.data,
         });
+        
       }
     };
 
     checkLoggedIn();
-  }, []);
+  }, [userData.token]);
 
   return (
     <GlobalProvider.Provider value={{userData, setUserData}}>
@@ -50,9 +56,19 @@ export default function App() {
         <div className="container">
         <Switch>
           <Route exact path="/" component={Home}/>
-          <Route path="/login" component={Login}/>
-          <Route path="/register" component={Register}/>
-          <Route path="/appointments" component={CreateAppointment}/>
+          {userData.user ? (
+            <>
+            <Route path="/appointments" component={CreateAppointment}/>
+            <Route path='/patients'render={(props) => (<UserList {...props} type={"patient"} />)}/>
+            <Route path='/doctors'render={(props) => (<UserList {...props} type={"doctor"} />)}/>
+            <Route path="/user/:id" component={EditUser} />
+            </>
+          ):(
+            <>
+            <Route path='/register' render={(props) => (<CreateUser {...props} type={"patient"} admin={false} />)}/>
+            <Route path="/login" component={Login}/>
+            </>
+          )}
         </Switch>
         </div>
       </BrowserRouter>
