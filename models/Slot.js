@@ -1,15 +1,17 @@
 const mongoose = require('mongoose');
 
 const slotSchema = new mongoose.Schema({
+    date:{
+        type:Date,
+        required: [true, 'Select Date']
+    },
     time:{
         type:String,
         trim:true,
         required: [true, 'Select Time']
     },
-    doctorsAvailable:{
-        type:String,
-        trim:true,
-        required: [true, 'Available doctors']
+    availableDoctors:{
+        type:Array
     },
     createdAt:{ 
         type:Date,

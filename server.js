@@ -5,9 +5,9 @@ const colors = require('colors');
 const morgan = require('morgan');
 
 
-const auth = require('./middleware/auth')
-const connectDB = require('./config/db')
-dotenv.config({path: './config/config.env'})
+const auth = require('./middleware/auth');
+const connectDB = require('./config/db');
+dotenv.config({path: './config/config.env'});
 
 const users = require('./routes/users');
 const patients = require('./routes/patients');
@@ -23,8 +23,9 @@ if(process.env.NODE_ENV === 'development'){
 }
 
 app.use('/', users);
-app.use('/admin',auth, admins);
+app.use('/patients', auth, patients);
+app.use('/admins',auth, admins);
 
 
 const PORT = process.env.PORT;
-app.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} on port ${PORT}`.yellow.bold));
+app.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.bgRed.black.bold));

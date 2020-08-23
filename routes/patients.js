@@ -1,14 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const {getUsers, loginUser, addUser} = require('../controllers/users');
+const {createAppointment, getAppointments} = require('../controllers/appointments');
+const {checkLogin, getUser } = require('../controllers/users');
+router
+    .route('/appointment')
+    .post(createAppointment)
+    .get(getAppointments);
+
 
 router
-    .route('/register')
-    .post(addUser);
-
-router
-    .route('/login')
-    .post(loginUser);
-
-
+    .route('/checklogin')
+    .post(checkLogin)
+    .get(getUser);
 module.exports = router;

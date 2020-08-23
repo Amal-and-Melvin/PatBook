@@ -1,15 +1,25 @@
 const mongoose = require('mongoose');
 
-const slotSchema = new mongoose.Schema({
+const appointmentSchema = new mongoose.Schema({
+    date:{
+        type:Date,
+        required: [true, 'Select Date']
+    },
+    patient:{
+        type:String,
+        required: [true, 'Patient required']
+    },
+    slot:{
+        type:String,
+        required: [true, 'Slot required']
+    },
+    doctor:{
+        type:String,
+        required: [true, 'Doctor required']
+    },
     time:{
         type:String,
-        trim:true,
-        required: [true, 'Select Time']
-    },
-    doctorsAvailable:{
-        type:String,
-        trim:true,
-        required: [true, 'Available doctors']
+        required: [true, 'Time required']
     },
     createdAt:{ 
         type:Date,
@@ -17,4 +27,4 @@ const slotSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('Slot', slotSchema);
+module.exports = mongoose.model('Appointment', appointmentSchema);

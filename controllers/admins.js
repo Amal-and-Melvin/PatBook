@@ -7,11 +7,19 @@ exports.getUsers = async(req, res, next) =>{
     try{
         const users = await User.find({type: req.params.id });
 
-        return res.status(200).json({
-            success: true,
-            count: users.length,
-            data: users
+        return res.status(200).json({users})
+    }catch{
+        return res.status(500).json({
+            success: false,
+            error: 'Server Error'
         })
+    }
+}
+
+exports.getUser = async(req, res, next) =>{
+    try{
+        const user = await User.findById(req.params.id);
+        return res.status(200).json({user})
     }catch{
         return res.status(500).json({
             success: false,
@@ -62,3 +70,5 @@ exports.updateUser = async (req, res, next) =>{
         });
     }
 }
+
+
