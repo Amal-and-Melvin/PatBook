@@ -1,12 +1,29 @@
-import React from 'react'
+import React, { useContext } from 'react';
+import GlobalProvider from '../../context/GlobalState';
 
 export const Appointment = ({ appointment }) => {
+    const { userData } = useContext(GlobalProvider);
+    function formatDate(date) {
+        var res = date.slice(0, 10);
+        return res;
+    }
+
     return (
-        <div>
-            <h1>{appointment.date}</h1>
-            <h1>{appointment.time}</h1>
-            <h1>{appointment.patient}</h1>
-            <h1>{appointment.doctor}</h1>
-        </div>
+        <tr>
+            <td className="tdMain">{appointment.time}</td>
+            <td>{formatDate(appointment.date)}</td>
+            {userData.user.type === "patient" ?(
+                <td>Dr {appointment.doctor[0].forename} {appointment.doctor[0].surname}</td>
+            ): (
+                (userData.user.type === "admin" ?(
+                    <>
+                    <td>{appointment.patient[0].forename} {appointment.patient[0].surname}</td>
+                    <td>Dr {appointment.doctor[0].forename} {appointment.doctor[0].surname}</td>
+                    </>
+                  )
+                  :<td>{appointment.patient[0].forename} {appointment.patient[0].surname}</td> )
+                
+            )}
+        </tr>
     )
 }

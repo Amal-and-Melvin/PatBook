@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import Axios from "axios";
 import GlobalProvider from '../../context/GlobalState';
 import ErrorNotice from "../ErrorNotice";
+import { ReactComponent as LoginImg } from './2.svg';
 
 export const Login = () => {
   const {setUserData} = useContext(GlobalProvider);
@@ -35,16 +36,18 @@ export const Login = () => {
   }
 
   return (
-    <>
-      <h1>Login</h1>
-      {error && (
+    <div className="login">
+      <LoginImg className="loginImg"/>
+        
+        <form onSubmit={onSubmit}>
+          {error && (
             <ErrorNotice message={error} clearError={() => setError(undefined)} />
-        )}
-      <form onSubmit={onSubmit}>
-        <input type="text" value={user.email} onChange={onChange} name="email" placeholder="Email"></input><br/>
-        <input type="password" value={user.password} onChange={onChange} name="password" placeholder="Password"></input><br/>
-        <input type="submit" value="Login" />
-      </form>
-    </>
+          )}
+          <h1>Login</h1>
+          <input type="text" value={user.email} onChange={onChange} name="email" placeholder="Email"></input><br/>
+          <input type="password" value={user.password} onChange={onChange} name="password" placeholder="Password"></input><br/>
+          <input type="submit" value="Login" />
+        </form>
+    </div>
   )
 }

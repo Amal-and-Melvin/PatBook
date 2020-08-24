@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Appointment = require('../models/Appointment');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -72,3 +73,22 @@ exports.updateUser = async (req, res, next) =>{
 }
 
 
+//@desc get appointments of a user
+exports.getAppointments = async(req, res, next) =>{
+    try{
+        
+        const user = await User.findById(req.params.id);
+        if (user.type === "patient"){
+            const appointments = await Appointment.find({patient: req.params.id}).populate('patient doctor');
+            return res.status(200).json({appointments})
+        }else if (user.type === "doctor"){
+            const appointments = await Appointment.find({doctor: req.params.id}).populate('patient doctor');
+            return res.status(200).json({appointments})
+        }
+    }catch{
+        return res.status(500).json({
+            success: false,
+            error: 'Server Error'
+        })
+    }
+}

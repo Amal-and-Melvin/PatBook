@@ -10,11 +10,15 @@ exports.getAppointments = async(req, res, next) =>{
             const currentUser = await User.findOne({_id: req.user});
             var appointments = [];
             if (currentUser.type == 'patient'){
-                appointments = await Appointment.find({patient: req.user});
+                appointments = await Appointment.find({patient: req.user}).populate('patient doctor');
             }else if(currentUser.type == 'doctor'){
-                appointments = await Appointment.find({doctor: req.user});
+                appointments = await Appointment.find({doctor: req.user}).populate('patient doctor');
+            }else if(currentUser.type == 'admin'){
+                if (req.params.id){
+                    appointments = await Appointment.find({patient: req.params.id}).populate('patient doctor');
+                }
             }
-            console.log(appointments) 
+            console.log(appointments[0]);
             return res.status(200).json({appointments})    
         }
     }catch(err) {
@@ -52,7 +56,7 @@ exports.createAppointment = async(req, res, next) =>{
         if(req.user){
             const currentUser = await User.findOne({_id: req.user});
             if (currentUser.type == 'patient'){
-                appointment.patient = currentUser._id
+                appointment.patient = currentUser
             }
         }
         appointment.date = formatDate(appointment.date);
@@ -62,7 +66,6 @@ exports.createAppointment = async(req, res, next) =>{
         var newSlot =[];
 
         if (!currentSlot){
-            console.log("NOOOOo");
             //if the slot does not exist then make one
             const doctors = await User.find({type: "doctor" }).distinct( "_id" );
             selectedDoctor = getDoctor(doctors);
@@ -75,7 +78,6 @@ exports.createAppointment = async(req, res, next) =>{
             newSlot = await Slot.create(slot);
             //console.log(newSlot) 
         }else {
-            console.log("YEYEY");
             const availableDoctors = currentSlot.availableDoctors;
             if (availableDoctors.length !== 0){
                 selectedDoctor = getDoctor(availableDoctors);
@@ -87,12 +89,10 @@ exports.createAppointment = async(req, res, next) =>{
                     error: 'No doctors available for this time slot. Please choose another slot.'
                 })
             }
-            
         }
         appointment.slot = newSlot._id;
         appointment.doctor = selectedDoctor._id;
         newAppointment = await Appointment.create(appointment);
-        console.log(newAppointment);
     }catch(err){
         return res.status(500).json({
             success: false,

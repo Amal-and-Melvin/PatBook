@@ -48,6 +48,7 @@ export const UserList = ({type}) => {
                     <th>Created At</th>
                     <th>Delete</th>
                     <th>Edit</th>
+                    <th>Create Appointment</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -63,6 +64,7 @@ export const UserList = ({type}) => {
                             <td>{user.createdAt}</td>
                             <td><button onClick={() => deleteItem(user._id) } className="delete-btn">Delete</button></td>
                             <td><Link to={"/user/"+user._id}>Edit</Link></td>
+                            <td><Link to={"/appointment/"+user._id}>Appointment</Link></td>
                         </tr>
                     ))
                 }
