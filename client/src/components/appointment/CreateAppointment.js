@@ -43,7 +43,7 @@ export const CreateAppointment = (props) => {
         appointment,
         { headers: { "x-auth-token": userData.token } }
       );
-      history.push("0");
+      history.go(0);
     } catch (err) {
       console.log(err);
       err.response.data.error && setError(err.response.data.error);  
