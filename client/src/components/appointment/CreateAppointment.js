@@ -19,23 +19,6 @@ export const CreateAppointment = (props) => {
     createdAt: Date.now()
   });
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    try {
-        if (props.match.params.id){
-          appointment.patient = props.match.params.id;
-        }
-        await Axios.post(
-            "/patients/appointment",
-            appointment,
-            { headers: { "x-auth-token": userData.token } }
-          );
-          history.go(0);
-    } catch (err) {
-      err.response.data.error && setError(err.response.data.error);
-    }
-  }
-
   const onChange = (e) => {
     setAppointment({ ...appointment, [e.target.name]: e.target.value })
   }
@@ -47,6 +30,24 @@ export const CreateAppointment = (props) => {
   const onBlur = (e) => {
     e.currentTarget.type = "text";
     e.currentTarget.placeholder = "Select Date";
+  }
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    try{
+      if (props.match.params.id){
+        appointment.patient = props.match.params.id;
+      }
+      await Axios.post(
+        "/patients/appointment",
+        appointment,
+        { headers: { "x-auth-token": userData.token } }
+      );
+      history.push("0");
+    } catch (err) {
+      console.log(err);
+      err.response.data.error && setError(err.response.data.error);  
+    } 
   }
       
   return (
