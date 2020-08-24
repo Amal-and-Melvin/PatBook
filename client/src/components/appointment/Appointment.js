@@ -15,7 +15,14 @@ export const Appointment = ({ appointment }) => {
             {userData.user.type === "patient" ?(
                 <td>Dr {appointment.doctor[0].forename} {appointment.doctor[0].surname}</td>
             ): (
-                <td>{appointment.patient[0].forename} {appointment.patient[0].surname}</td>
+                (userData.user.type === "admin" ?(
+                    <>
+                    <td>{appointment.patient[0].forename} {appointment.patient[0].surname}</td>
+                    <td>Dr {appointment.doctor[0].forename} {appointment.doctor[0].surname}</td>
+                    </>
+                  )
+                  :<td>{appointment.patient[0].forename} {appointment.patient[0].surname}</td> )
+                
             )}
         </tr>
     )

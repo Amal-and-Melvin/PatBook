@@ -37,8 +37,15 @@ export const Appointments = (user) => {
               {userData.user.type === "patient" ?(
                 <th>Doctor</th>
                 ): (
-                  <th>Patient</th>
-              )}
+                  (userData.user.type === "admin" ?(
+                    <>
+                    <th>Patient</th>
+                    <th>Doctor</th>
+                    </>
+                  )
+                  :<th>Patient</th> )
+                  
+                )}
             </tr>
           </thead>
           <tbody>

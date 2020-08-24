@@ -38,10 +38,11 @@ export const Login = () => {
   return (
     <div className="login">
       <LoginImg className="loginImg"/>
-        {error && (
-          <ErrorNotice message={error} clearError={() => setError(undefined)} />
-          )}
+        
         <form onSubmit={onSubmit}>
+          {error && (
+            <ErrorNotice message={error} clearError={() => setError(undefined)} />
+          )}
           <h1>Login</h1>
           <input type="text" value={user.email} onChange={onChange} name="email" placeholder="Email"></input><br/>
           <input type="password" value={user.password} onChange={onChange} name="password" placeholder="Password"></input><br/>
