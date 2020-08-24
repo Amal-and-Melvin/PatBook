@@ -3,7 +3,6 @@ import ErrorNotice from "../ErrorNotice";
 import { useHistory } from "react-router-dom";
 import GlobalProvider from '../../context/GlobalState';
 import Axios from "axios";
-
 import { Appointments } from './Appointments';
 
 export const CreateAppointment = (props) => {
