@@ -12,9 +12,9 @@ import {CreateAppointment} from './components/appointment/CreateAppointment'
 
 import { UserList } from './components/admin/UserList';
 import { EditUser } from './components/admin/EditUser';
+import Scanner from './components/admin/Scanner';
 
 import GlobalProvider from './context/GlobalState';
-
 
 export default function App() {
   const [userData, setUserData] = useState({
@@ -61,7 +61,9 @@ export default function App() {
             <Route path="/appointments" component={CreateAppointment}/>
             <Route path='/patients'render={(props) => (<UserList {...props} type={"patient"} />)}/>
             <Route path='/doctors'render={(props) => (<UserList {...props} type={"doctor"} />)}/>
+            <Route path="/scanner" component={Scanner} />
             <Route path="/user/:id" component={EditUser} />
+            <Route path="/appointment/:id" component={CreateAppointment} />
             </>
           ):(
             <>

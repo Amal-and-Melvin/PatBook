@@ -9,28 +9,46 @@ export const Appointments = (user) => {
 
     useEffect(() => {
       const getAppointments = async () => {
-        const AllAppointments = await Axios.get("/patients/appointment", {
+        let allAppointments = [];
+        if(user.user !== undefined){
+          allAppointments = await Axios.get("/admins/appointments/"+user.user, {
             headers: { "x-auth-token": userData.token },
-        });
-        setAppointments(AllAppointments.data.appointments);
-        console.log(AllAppointments.data.appointments);
+          });
+        }else{
+          allAppointments = await Axios.get("/patients/appointment", {
+            headers: { "x-auth-token": userData.token },
+          });
+        }
+        setAppointments(allAppointments.data.appointments);
       };
+
       if(userData.user !== undefined){
         getAppointments();
       }
-    },[userData]);
+    },[userData, user.user]);
     
     return (
       <div className="page">
-        {appointments ? (
-           appointments.map(appointment => (
-            <Appointment key={appointment._id} appointment={appointment}/>
-        ))
-        ) : (
-          <>
-     
-          </>
-        )}
+        <table>
+          <thead>    
+            <tr>
+              <th>Time</th>
+              <th>Data</th>
+              {userData.user.type === "patient" ?(
+                <th>Doctor</th>
+                ): (
+                  <th>Patient</th>
+              )}
+            </tr>
+          </thead>
+          <tbody>
+            {appointments && (
+              appointments.map(appointment => (
+                <Appointment key={appointment._id} appointment={appointment}/>
+              ))
+            )}
+          </tbody>
+        </table>
       </div>
     );
   }

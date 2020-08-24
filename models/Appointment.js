@@ -5,18 +5,9 @@ const appointmentSchema = new mongoose.Schema({
         type:Date,
         required: [true, 'Select Date']
     },
-    patient:{
-        type:String,
-        required: [true, 'Patient required']
-    },
-    slot:{
-        type:String,
-        required: [true, 'Slot required']
-    },
-    doctor:{
-        type:String,
-        required: [true, 'Doctor required']
-    },
+    patient:[{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    slot:[{ type: mongoose.Schema.Types.ObjectId, ref: 'Slot' }],
+    doctor:[{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     time:{
         type:String,
         required: [true, 'Time required']

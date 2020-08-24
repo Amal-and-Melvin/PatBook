@@ -20,20 +20,22 @@ export const AuthOptions = () => {
         <>
         {userData.user ? (
             <>
-                <NavLink activeClassName="active" to="/appointments">Appointments</NavLink>
-                {userData.user.type === "admin" &&
+                {userData.user.type === "admin" ?
                     <>
                     <NavLink activeClassName="active" to="/patients">Patients</NavLink>
                     <NavLink activeClassName="active" to="/doctors">Doctors</NavLink>
+                    <NavLink activeClassName="active" to="/scanner">Scanner</NavLink>
                     </>
+                :
+                    <NavLink activeClassName="active" to="/appointments">Appointments</NavLink>
                 }
-                <button onClick={logout}>Log out</button>
+                <button className="right logout" onClick={logout}>Log out</button>
             </>
         ) : (
-            <>
+            <span className="right">  
                 <NavLink activeClassName="active" to="/login">Login</NavLink>
                 <NavLink activeClassName="active" to="/register">Register</NavLink>
-            </>
+            </span>
          )}
         </>
     )
