@@ -18,7 +18,7 @@ exports.getAppointments = async(req, res, next) =>{
                     appointments = await Appointment.find({patient: req.params.id}).populate('patient doctor');
                 }
             }
-            console.log(appointments[0]);
+           
             return res.status(200).json({appointments})    
         }
     }catch(err) {
@@ -92,7 +92,8 @@ exports.createAppointment = async(req, res, next) =>{
         }
         appointment.slot = newSlot._id;
         appointment.doctor = selectedDoctor._id;
-        newAppointment = await Appointment.create(appointment);
+        const newAppointment = await Appointment.create(appointment);
+        return res.status(200).json({newAppointment})  
     }catch(err){
         return res.status(500).json({
             success: false,

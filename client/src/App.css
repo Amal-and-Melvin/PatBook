@@ -13,6 +13,13 @@ h1 {
   padding: 5% 10%;
 }
 
+.scannerResult{
+  margin-top:5%;
+  padding:2%;
+  background: #005eb8;
+  color:white;
+}
+
 /*NAV BAR */
 nav {
   margin:30px;
