@@ -92,3 +92,15 @@ exports.getAppointments = async(req, res, next) =>{
         })
     }
 }
+
+exports.ScanUser = async(req, res, next) =>{
+    try{
+        const user = await User.find({email: req.params.id});
+        return res.status(200).json({user})
+    }catch{
+        return res.status(500).json({
+            success: false,
+            error: 'Server Error'
+        })
+    }
+}
