@@ -54,6 +54,7 @@ export const CreateAppointment = (props) => {
           {error && (
           <ErrorNotice message={error} clearError={() => setError(undefined)} />
           )}
+          {userData.user.type !== "doctor" && (
           <form onSubmit={onSubmit} name="time" value={appointment.time}>
               <input type="text" value={appointment.date} onChange={onChange} name="date" onFocus = {onFocus} onBlur={onBlur} placeholder="Select Date"/>
               <select onChange={onChange} name="time">
@@ -75,6 +76,7 @@ export const CreateAppointment = (props) => {
               </select><br />
               <input type="submit" value="Request Appointment" />
           </form>
+          )}
           <Appointments user={props.match.params.id} />
       </div>
   )
