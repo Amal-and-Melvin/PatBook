@@ -3,7 +3,6 @@ import ErrorNotice from "../ErrorNotice";
 import { useHistory } from "react-router-dom";
 import GlobalProvider from '../../context/GlobalState';
 import Axios from "axios";
-
 import { Appointments } from './Appointments';
 
 export const CreateAppointment = (props) => {
@@ -43,7 +42,7 @@ export const CreateAppointment = (props) => {
         appointment,
         { headers: { "x-auth-token": userData.token } }
       );
-      history.push("0");
+      history.go(0);
     } catch (err) {
       console.log(err);
       err.response.data.error && setError(err.response.data.error);  
