@@ -1,9 +1,20 @@
-import React, { Component } from 'react'
+import React, { Component, useContext, useEffect } from "react";
+import GlobalProvider from '../../context/GlobalState';
 import QrReader from 'react-qr-reader'
+import Axios from "axios";
 
-export default class Test extends Component {
+export default class Scanner extends Component {
   state = {
-    result: 'No result'
+    result: 'No result',
+    userData: useContext(GlobalProvider)
+  }
+  
+  scan = async (data)  =>{
+    const getUser = await Axios.get("/admins/scan/"+data, {
+      headers: { "x-auth-token": this.state.userData.token },
+    });
+    console.log("hhfidi");
+    console.log(getUser);
   }
 
   handleScan = data => {
@@ -11,6 +22,7 @@ export default class Test extends Component {
       this.setState({
         result: data
       })
+      this.scan(data);
     }
   }
   handleError = err => {
